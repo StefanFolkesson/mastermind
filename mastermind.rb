@@ -11,9 +11,10 @@ set :color, "#FF0000"
 @@guesses =6
 @@message =""
 @@cheat =""
-game = ['red','green','blue','blue']
+
 #/
 get '/' do
+    game = ['red','green','blue','blue']
     black =0
     white =0
     if(!params["pos1"].nil?)
