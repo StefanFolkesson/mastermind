@@ -5,16 +5,16 @@ require 'sinatra/reloader' if development?
 # array probably called game
 
 
-/#set :number, rand(100)
 set :color, "#FF0000"
-
+@@colors =['red','green','blue','yellow','brown','pink','purple']
 @@guesses =6
 @@message =""
 @@cheat =""
-
+@@guessesmaster = []
+@@master = [@@colors.sample,@@colors.sample,@@colors.sample,@@colors.sample]
 #/
 get '/' do
-    game = ['red','green','blue','blue']
+    game = @@master
     black =0
     white =0
     if(!params["pos1"].nil?)
@@ -45,8 +45,16 @@ get '/' do
             white+=1
         end
     end
+    guess=[params["pos1"],params["pos2"],params["pos3"],params["pos4"],white,black]
 
-    erb :index, :locals => {:black => black,:white => white}
+    if(!params["pos1"].nil?)
+        @@guessesmaster.push(guess)
+    else
+        @@guessesmaster=[]
+        @@master = [@@colors.sample,@@colors.sample,@@colors.sample,@@colors.sample]
+    end
+
+    erb :index, :locals => {:guesses => @@guessesmaster.length}
 end
 
 
