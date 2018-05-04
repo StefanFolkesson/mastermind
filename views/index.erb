@@ -22,15 +22,23 @@ span{
 
 }
 </style>
-<body>
+<body onload="mou4();">
 <% if guesses>0 %>
   
 <% @@guessesmaster.each do |guess| %>
 <div class="guess"><div>Gissning : </div>
-<span style="background-color:<%= guess[0] %>"> </span>
-<span style="background-color:<%= guess[1] %>"> </span>
-<span style="background-color:<%= guess[2] %>"> </span>
-<span style="background-color:<%= guess[3] %>"> </span>
+<svg height="2em" width="2em">
+    <circle cx="1em" cy="1em" r="0.7em" stroke="black" stroke-width="1" fill="<%= guess[0] %>" />
+</svg>
+<svg height="2em" width="2em">
+    <circle cx="1em" cy="1em" r="0.7em" stroke="black" stroke-width="1" fill="<%= guess[1] %>" />
+</svg>
+<svg height="2em" width="2em">
+    <circle cx="1em" cy="1em" r="0.7em" stroke="black" stroke-width="1" fill="<%= guess[2] %>" />
+</svg>
+<svg height="2em" width="2em">
+    <circle cx="1em" cy="1em" r="0.7em" stroke="black" stroke-width="1" fill="<%= guess[3] %>" />
+</svg>
 <% cirarr = [] 
 if guess[5]>0 then cirarr.push('black') end
 if guess[5]>1 then cirarr.push('black') end
@@ -65,44 +73,57 @@ while cirarr.length<4 do cirarr.push('blank') end
 <% end %>
        <form>
         <div>
-            <select name="pos1">
+            <select id ="pos1" name="pos1"  onclick="mou(this);" onload="mou(this);">
                 <% @@colors.each do |color| %>
                     <% if (color == lastpick[0]) %>
-                        <option value="<%= color %>" selected><%= color %></option>
+                        <option style="background-color:<%= color %>" value="<%= color %>" selected><%= color %></option>
                     <% else %>
-                        <option value="<%= color %>"><%= color %></option>
+                        <option style="background-color:<%= color %>" value="<%= color %>"><%= color %></option>
                     <% end %>
                 <% end %>
             </select>
-            <select name="pos2">
+            <select id ="pos2" name="pos2"  onclick="mou(this);" onload="mou(this);">
                 <% @@colors.each do |color| %>
                     <% if (color == lastpick[1]) %>
-                        <option value="<%= color %>" selected><%= color %></option>
+                        <option style="background-color:<%= color %>" value="<%= color %>" selected><%= color %></option>
                     <% else %>
-                        <option value="<%= color %>"><%= color %></option>
+                        <option style="background-color:<%= color %>" value="<%= color %>"><%= color %></option>
                     <% end %>
                 <% end %>
             </select>
-            <select name="pos3">
+            <select id ="pos3" name="pos3"  onclick="mou(this);" onload="mou(this);">
                 <% @@colors.each do |color| %>
                     <% if (color == lastpick[2]) %>
-                        <option value="<%= color %>" selected><%= color %></option>
+                        <option style="background-color:<%= color %>" value="<%= color %>" selected><%= color %></option>
                     <% else %>
-                        <option value="<%= color %>"><%= color %></option>
+                        <option style="background-color:<%= color %>" value="<%= color %>"><%= color %></option>
                     <% end %>
                 <% end %>
             </select>
-            <select name="pos4">
+            <select id ="pos4" name="pos4" onclick="mou(this);" ="mou(this);">
                 <% @@colors.each do |color| %>
                     <% if (color == lastpick[3]) %>
-                        <option value="<%= color %>" selected><%= color %></option>
+                        <option style="background-color:<%= color %>" value="<%= color %>" selected><%= color %></option>
                     <% else %>
-                        <option value="<%= color %>"><%= color %></option>
+                        <option style="background-color:<%= color %>" value="<%= color %>"><%= color %></option>
                     <% end %>
                 <% end %>
             </select>
         </div>
-        <input type="submit" value="Testa">
+        <input type="submit" value="Gissa">
     </form>
 </body>
+
+<script>
+    function mou (test){
+        console.log('asdasd');
+        test.style.backgroundColor=test.options[test.selectedIndex].value;
+    }
+    function mou4(){
+        mou(document.getElementById('pos1'));
+        mou(document.getElementById('pos2'));
+        mou(document.getElementById('pos3'));
+        mou(document.getElementById('pos4'));
+    }
+</script>
 </html>
